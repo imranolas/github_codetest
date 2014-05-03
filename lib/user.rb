@@ -19,4 +19,8 @@ class User
     languages.inject(Hash.new(0)) { |hash,v| hash[v] += 1; hash }
   end
 
+  def favourite_language
+    languages.max_by { |k,v| v }.first unless languages.empty?
+  end
+
 end
