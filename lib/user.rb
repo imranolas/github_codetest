@@ -9,12 +9,16 @@ class User
 
   def repos
     unless @repos
-      response = self.class.get("/users/#{username}/repos", headers: { 'User-Agent' => 'github api codetest' } )
+      begin
+        response = self.class.get("/users/#{username}/repos", headers: { 'User-Agent' => 'github api codetest' } )
+      rescue
+        response = []
+      end
       @repos = []
       begin
         @message = response["message"]
       rescue TypeError
-        response.each { |repo| @repos << repo }
+        @repos = response
       end
     end
     @repos
