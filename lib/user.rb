@@ -14,4 +14,9 @@ class User
     @repos
   end
 
+  def languages
+    languages = repos.map { |repo| repo.fetch('language', nil) }
+    languages.inject(Hash.new(0)) { |hash,v| hash[v] += 1; hash }
+  end
+
 end

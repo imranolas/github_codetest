@@ -29,4 +29,10 @@ describe User do
       end
     end
 
+    describe '#languages' do
+      its(:languages) { should be_an Hash }
+      its(:languages) { should include 'Ruby' }
+      its(:languages) { should eql({"CSS"=>3, "Ruby"=>9, nil=>1}) }
+    end
+
 end
